@@ -1,31 +1,29 @@
-## GoIT Node.js Course Template Homework
+h1 THIS IS TUTORIAL PRODUCT TO GET BASIC EXPERIENCE OF WORK WITH MONGO DB
+h2 The application uses simple No-SQL data base, representing a kind of contact list. 
 
-Выполните форк этого репозитория для выполнения домашних заданий (2-6)
-Форк создаст репозиторий на вашем http://github.com
+In order to use the application, the following steps are needed:
+- register at https://www.mongodb.com/atlas/database
+- create new project and set up a cluster
+- use [MongoDB Compass] (https://www.mongodb.com/try/download/compass) for convenient creating new database and adding new collection (if nesessary) from .JSON file.
+Collection also may be created later manually, through POST method. 
+- install [Postman] (https://www.postman.com/downloads/)
+- start the application by typing 'npm run start' or 'yarn start' in BASH-terminal (or similar).
+- further, use Postman for listing, adding, deleteing and updating the contact - CRUD operations.
 
-Добавьте ментора в коллаборацию
+Here are the routs to be used (in the Postman): 
+GET metod:
+localhost:3000/api/contacts/ (lists all available contacts)
+localhost:3000/api/contacts/[-id-] (lists only one contact, wit id selected )
 
-Для каждой домашней работы создавайте свою ветку.
+POST method:
+localhost:3000/api/contacts/  (adds the new contact to collection. When building the request body for adding, kindly have in mind that 'name', 'email', 'phone' fields are all required and cannot be omitted )
 
-- hw02
-- hw03
-- hw04
-- hw05
-- hw06
+PATCH method:
+localhost:3000/api/contacts/[-id-]/favorite (in this application it is designed to edit only one field "favorite" of any selected contact by setting this parmeter to "true" or "false")
 
-Каждая новая ветка для дз должна делаться с master
+PUT method:
+localhost:3000/api/contacts/[-id-] (amends/ adds multiple fields of the contact selected by id )
 
-После того как вы закончили выполнять домашнее задание в своей ветке, необходимо сделать пулл-реквест (PR). Потом добавить ментора для ревью кода. Только после того как ментор заапрувит PR, вы можете выполнить мердж ветки с домашним заданием в мастер.
+DELETE method:
+localhost:3000/api/contacts/[-id-] (deletes the chosen contact)
 
-Внимательно читайте комментарии ментора. Исправьте замечания и сделайте коммит в ветке с домашним заданием. Изменения подтянуться в PR автоматически после того как вы отправите коммит с исправлениями на github
-После исправления снова добавьте ментора на ревью кода.
-
-- При сдаче домашней работы есть ссылка на PR
-- JS-код чистый и понятный, для форматирования используется Prettier
-
-### Команды:
-
-- `npm start` &mdash; старт сервера в режиме production
-- `npm run start:dev` &mdash; старт сервера в режиме разработки (development)
-- `npm run lint` &mdash; запустить выполнение проверки кода с eslint, необходимо выполнять перед каждым PR и исправлять все ошибки линтера
-- `npm lint:fix` &mdash; та же проверка линтера, но с автоматическими исправлениями простых ошибок
