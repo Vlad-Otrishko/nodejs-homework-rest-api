@@ -10,12 +10,12 @@ Collection also may be created later manually, through POST method.
 - start the application by typing ***'npm run start'*** or ***'yarn start'*** in BASH-terminal (or similar).
 - further, use Postman for listing, adding, deleteing and updating the contact - CRUD operations.
 
-Here are the routs to be used (in the Postman): 
-***GET metod:***
-**localhost:3000/api/contacts/ **(lists all available contacts)
-**localhost:3000/api/contacts/[-id-] ** (lists only one contact, wit id selected )
+Here are the routs to be used (in the Postman): /hr
+**GET metod:**
+<localhost:3000/api/contacts/>(lists all available contacts) /hr
+<localhost:3000/api/contacts/[-id-]> (lists only one contact, wit id selected )
 
-***POST method:***
+**POST method:** /hr
 **localhost:3000/api/contacts/  **(adds the new contact to collection. When building the request body for adding, kindly have in mind that 'name', 'email', 'phone' fields are all required and cannot be omitted )
 
 ***PATCH method:***
