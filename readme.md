@@ -1,5 +1,5 @@
-h1 THIS IS TUTORIAL PRODUCT TO GET BASIC EXPERIENCE OF WORK WITH MONGO DB
-h2 The application uses simple No-SQL data base, representing a kind of contact list. 
+<h1> THIS IS TUTORIAL PRODUCT TO GET BASIC EXPERIENCE OF WORK WITH MONGO DB </h1>
+<h2> The application uses simple No-SQL data base, representing a kind of contact list. </h2> 
 
 In order to use the application, the following steps are needed:
 - register at https://www.mongodb.com/atlas/database
