@@ -11,19 +11,19 @@ Collection also may be created later manually, through POST method.
 - further, use Postman for listing, adding, deleteing and updating the contact - CRUD operations.
 
 Here are the routs to be used (in the Postman): <hr>
-**GET metod:** <hr>
-<localhost:3000/api/contacts/>(lists all available contacts) <hr>
+**GET metod:** <br>
+<localhost:3000/api/contacts/>(lists all available contacts) <br>
 <localhost:3000/api/contacts/[-id-]> (lists only one contact, with id selected ) <hr>
 
-**POST method:** <hr>
-**localhost:3000/api/contacts/** (adds the new contact to collection. When building the request body for adding, kindly have in mind that 'name', 'email', 'phone' fields are all required and cannot be omitted ) <hr>
+**POST method:** <br>
+<localhost:3000/api/contacts/> (adds the new contact to collection. When building the request body for adding, kindly have in mind that 'name', 'email', 'phone' fields are all required and cannot be omitted ) <hr>
 
-***PATCH method:***
-**localhost:3000/api/contacts/[-id-]/favorite** (in this application it is designed to edit only one field "favorite" of any selected contact by setting this parmeter to "true" or "false")
+**PATCH method:** <br>
+<localhost:3000/api/contacts/[-id-]/favorite> (in this application it is designed to edit only one field "favorite" of any selected contact by setting this parmeter to "true" or "false") <hr>
 
-***PUT method:***
-**localhost:3000/api/contacts/[-id-]** (amends/ adds multiple fields of the contact selected by id )
+**PUT method:** <br>
+<localhost:3000/api/contacts/[-id-]> (amends/ adds multiple fields of the contact selected by id ) <hr>
 
-***DELETE method:***
-**localhost:3000/api/contacts/[-id-]** (deletes the chosen contact)
+**DELETE method:** <br>
+<localhost:3000/api/contacts/[-id-]> (deletes the chosen contact)
 
