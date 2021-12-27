@@ -4,7 +4,7 @@
 In order to use the application, the following steps are needed:
 - register at https://www.mongodb.com/atlas/database
 - create new project and set up a cluster
-- use [MongoDB Compass] (https://www.mongodb.com/try/download/compass) for convenient creating new database and adding new collection (if nesessary) from .JSON file.
+- use <a href='https://www.mongodb.com/try/download/compass'> MongoDB Compass </a> for convenient creating new database and adding new collection (if nesessary) from .JSON file.
 Collection also may be created later manually, through POST method. 
 - install [Postman] (https://www.postman.com/downloads/)
 - start the application by typing 'npm run start' or 'yarn start' in BASH-terminal (or similar).
