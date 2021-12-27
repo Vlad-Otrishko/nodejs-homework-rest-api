@@ -6,8 +6,8 @@ In order to use the application, the following steps are needed:
 - create new project and set up a cluster
 - use <a href='https://www.mongodb.com/try/download/compass'> MongoDB Compass </a> for convenient creating new database and adding new collection (if nesessary) from .JSON file.
 Collection also may be created later manually, through POST method. 
-- install [Postman] (https://www.postman.com/downloads/)
-- start the application by typing 'npm run start' or 'yarn start' in BASH-terminal (or similar).
+- install <a href='https://www.postman.com/downloads/'>Postman </a>
+- start the application by typing ***'npm run start'*** or ***'yarn start'*** in BASH-terminal (or similar).
 - further, use Postman for listing, adding, deleteing and updating the contact - CRUD operations.
 
 Here are the routs to be used (in the Postman): 
