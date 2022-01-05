@@ -2,30 +2,27 @@
 const express = require('express')
 const router = express.Router()
 const { NotFound, BadRequest } = require('http-errors')
-const Joi = require('joi')
-const joiSchema = Joi.object({
-  name: Joi.string().required(),
-  email: Joi.string().required(),
-  phone: Joi.string().required(),
-  favorite: Joi.boolean(),
-})
-const patchJoiSchema = Joi.object({
-  name: Joi.string().optional(),
-  email: Joi.string().optional(),
-  phone: Joi.string().optional(),
-  favorite: Joi.boolean(),
-})
-const { Contact } = require('../../model')
+const { authenticate } = require('../../middlewares')
 
-router.get('/', async (req, res, next) => {
+const { Contact } = require('../../models')
+const { joiSchema, patchFavoriteJoiSchema } = require('../../models/contact')
+
+router.get('/', authenticate, async (req, res, next) => {
   try {
-    const contacts = await Contact.find()
+    const { page = 1, limit = 10, favorite } = req.query
+    const { _id } = req.user
+    const skip = (page - 1) * limit
+    const contacts = await Contact.find(
+      { owner: _id },
+      '-createdAt -updatedAt',
+      { skip, limit: Number(limit) }
+    ).find({ favorite }) // доп задание 2  - фильтрация результатов по параметру favorite
     res.json(contacts)
   } catch (error) {
     next(error)
   }
 })
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', authenticate, async (req, res, next) => {
   const { id } = req.params
   try {
     const product = await Contact.findById(id)
@@ -41,7 +38,7 @@ router.get('/:id', async (req, res, next) => {
   }
 })
 // POST /api/products
-router.post('/', async (req, res, next) => {
+router.post('/', authenticate, async (req, res, next) => {
   try {
     const { error } = joiSchema.validate(req.body)
     if (error) {
@@ -50,8 +47,10 @@ router.post('/', async (req, res, next) => {
     if (!Object.keys(req.body).includes('favorite')) {
       req.body.favorite = false
     }
+    // console.log(req.user)
+    const { _id } = req.user
 
-    const newContact = await Contact.create(req.body)
+    const newContact = await Contact.create({ ...req.body, owner: _id })
     res.status(201).json(newContact)
   } catch (error) {
     if (error.message.includes('validation failed')) {
@@ -62,7 +61,7 @@ router.post('/', async (req, res, next) => {
   }
 })
 
-router.put('/:id', async (req, res, next) => {
+router.put('/:id', authenticate, async (req, res, next) => {
   try {
     const { error } = joiSchema.validate(req.body)
     if (error) {
@@ -78,9 +77,9 @@ router.put('/:id', async (req, res, next) => {
     next(error)
   }
 })
-router.patch('/:contactId/favorite', async (req, res, next) => {
+router.patch('/:contactId/favorite', authenticate, async (req, res, next) => {
   try {
-    const { error } = patchJoiSchema.validate(req.body)
+    const { error } = patchFavoriteJoiSchema.validate(req.body)
     if (error) {
       throw new BadRequest(error.message)
     }
@@ -99,7 +98,7 @@ router.patch('/:contactId/favorite', async (req, res, next) => {
   }
 })
 
-router.delete('/:id', async (req, res, next) => {
+router.delete('/:id', authenticate, async (req, res, next) => {
   try {
     const { id } = req.params
     const deleteContact = await Contact.findByIdAndRemove(id)
