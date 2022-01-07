@@ -12,11 +12,21 @@ router.get('/', authenticate, async (req, res, next) => {
     const { page = 1, limit = 10, favorite } = req.query
     const { _id } = req.user
     const skip = (page - 1) * limit
-    const contacts = await Contact.find(
-      { owner: _id },
+    let contacts = await Contact.find(
+      { owner: _id, favorite },
       '-createdAt -updatedAt',
-      { skip, limit: Number(limit) }
-    ).find({ favorite }) // доп задание 2  - фильтрация результатов по параметру favorite
+      {
+        skip,
+        limit: Number(limit),
+      }
+    )
+    // доп задание 2  - фильтрация результатов по параметру favorite
+    if (favorite === undefined) {
+      contacts = await Contact.find({ owner: _id }, '-createdAt -updatedAt', {
+        skip,
+        limit: Number(limit),
+      })
+    }
     res.json(contacts)
   } catch (error) {
     next(error)
@@ -47,7 +57,6 @@ router.post('/', authenticate, async (req, res, next) => {
     if (!Object.keys(req.body).includes('favorite')) {
       req.body.favorite = false
     }
-    // console.log(req.user)
     const { _id } = req.user
 
     const newContact = await Contact.create({ ...req.body, owner: _id })
