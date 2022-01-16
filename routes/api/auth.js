@@ -7,6 +7,7 @@ const { User } = require('../../models')
 const { joiSchema } = require('../../models/user')
 
 const router = express.Router()
+const gravatar = require('gravatar')
 
 const { SECRET_KEY } = process.env
 
@@ -24,7 +25,13 @@ router.post('/signup', async (req, res, next) => {
 
     const salt = await bcrypt.genSalt(10)
     const hashPassword = await bcrypt.hash(password, salt)
-    const newUser = await User.create({ name, email, password: hashPassword })
+    const avatarURL = gravatar.url(email)
+    const newUser = await User.create({
+      name,
+      email,
+      password: hashPassword,
+      avatarURL,
+    })
     res.status(201).json({
       user: {
         name: newUser.name,
@@ -52,7 +59,7 @@ router.post('/login', async (req, res, next) => {
       throw new Unauthorized('Email or password is wrong')
     }
 
-    const { _id, name } = user
+    const { _id, name, avatarURL } = user
     const payload = {
       id: _id,
     }
@@ -63,6 +70,7 @@ router.post('/login', async (req, res, next) => {
       user: {
         email,
         name,
+        avatarURL,
       },
     })
   } catch (error) {
